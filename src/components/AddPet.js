@@ -26,22 +26,25 @@ const AddPet = () => {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setPet({
-                ...pet,
-                pic: reader.result
-            });
-        };
-        reader.readAsDataURL(file);
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPet({
+                    ...pet,
+                    pic: reader.result
+                });
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("Submitting pet data:", pet); // Debugging line
         axios.post('https://apdoptdogserver.onrender.com/api/pets', pet)
             .then(response => {
                 if (response && response.data) {
-                    console.log(response.data);
+                    console.log("Response data:", response.data); // Debugging line
                     navigate('/admin');  // Redirect to admin dashboard
                 } else {
                     console.error('Invalid response:', response);
@@ -53,7 +56,6 @@ const AddPet = () => {
                 alert('Error: ' + error.message);  // Display error message
             });
     };
-
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-200 to-green-200 flex flex-col justify-center items-center">
@@ -98,7 +100,6 @@ const AddPet = () => {
                     <button type="submit" className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline transform transition duration-300 hover:scale-105">
                         Add Pet
                     </button>
-
                 </form>
             </div>
         </div>
