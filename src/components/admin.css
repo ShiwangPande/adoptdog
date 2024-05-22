@@ -1,0 +1,22 @@
+.button {
+    background-color: primary;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: primaryHover;
+  }
+  
+  @media (max-width: 768px) {
+    .button {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
