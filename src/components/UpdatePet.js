@@ -20,7 +20,7 @@ const EditPet = () => {
 
     // Fetch pet data from the server
     useEffect(() => {
-        axios.get('http://localhost:5000/api/pets')
+        axios.get('https://apdoptdogserver.onrender.com/api/pets')
             .then(response => {
                 console.log('Pet data:', response.data); // Log the received pet data
                 setPetData(response.data);
@@ -77,7 +77,7 @@ const EditPet = () => {
             }
 
             // Send updated pet info to the server
-            const response = await axios.put(`http://localhost:5000/api/pets/${selectedPet}`, petInfo);
+            const response = await axios.put(`https://apdoptdogserver.onrender.com/api/pets/${selectedPet}`, petInfo);
 
             // Check if the update was successful
             if (response.status === 200) {

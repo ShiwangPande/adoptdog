@@ -10,7 +10,7 @@ const DeletePet = () => {
     }, []);
 
     const fetchPets = () => {
-        axios.get('http://localhost:5000/api/pets')
+        axios.get('https://apdoptdogserver.onrender.com/api/pets')
             .then(response => {
                 setPets(response.data);
             })
@@ -20,7 +20,7 @@ const DeletePet = () => {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/api/pets/${id}`)
+        axios.delete(`https://apdoptdogserver.onrender.com/api/pets/${id}`)
             .then(response => {
                 console.log(response.data);
                 // Remove the deleted pet from the list

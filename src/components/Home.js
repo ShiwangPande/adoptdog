@@ -66,7 +66,7 @@ const Adopt = () => {
     }, []);
 
     const fetchPets = () => {
-        axios.get('http://localhost:5000/api/pets')
+        axios.get('https://apdoptdogserver.onrender.com/api/pets')
             .then(response => {
                 setDogs(response.data);
             })
