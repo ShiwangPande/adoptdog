@@ -6,7 +6,7 @@ import AddPet from './components/AddPet';
 import UpdatePet from './components/UpdatePet';
 import DeletePet from './components/DeletePet';
 import Navbar from './components/Navbar';
-
+import TrackingPage from './components/TrackingPage';
 function App() {
   return (
     <Router>
@@ -14,8 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/trackpage" element={<TrackingPage />} />
         <Route path="/admin/add" element={<AddPet />} />
         <Route path="/admin/update" element={<UpdatePet />} />
+        <Route path="/admin/delete" element={<DeletePet />} /> {/* Ensure the path includes the ID parameter */}
         <Route path="/admin/delete" element={<DeletePet />} /> {/* Ensure the path includes the ID parameter */}
 
       </Routes>
