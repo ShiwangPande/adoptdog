@@ -94,7 +94,7 @@ const Adopt = () => {
     };
 
     return (
-        <div className='bg-gradient-to-br from-blue-200 to-green-200'>
+        <div className='bg-gradient-to-br from-blue-200 to-green-200 min-h-screen'>
             <div className="container mx-auto p-6">
                 <h1 className="text-4xl font-bold mb-8 text-center text-black/80 ">Available Dogs for Adoption</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
