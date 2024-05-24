@@ -41,7 +41,8 @@ const AddPet = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Submitting pet data:", pet); // Debugging line
-        axios.post('https://apdoptdogserver.onrender.com/api/pets', pet)
+        // axios.post('https://apdoptdogserver.onrender.com/api/pets', pet)
+        axios.post('http://localhost:5000/api/pets', pet)
             .then(response => {
                 if (response && response.data) {
                     console.log("Response data:", response.data); // Debugging line
