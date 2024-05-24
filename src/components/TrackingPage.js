@@ -34,7 +34,13 @@ const TrackingPage = () => {
                     <button onClick={handleClearSelection} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">Back to List</button>
                     <h2 className="text-xl font-semibold">{selectedPet.name}</h2>
                     <p className="text-gray-600">Gender: {selectedPet.gender}</p>
-                    {/* Display other pet details */}
+                    <p className="text-gray-600">Age: {selectedPet.age}</p>
+                    <p className="text-gray-600">Breed: {selectedPet.breed}</p>
+                    <p className="text-gray-600">Weight: {selectedPet.weight}</p>
+                    <p className="text-gray-600">Location: {selectedPet.location}</p>
+                    <p className="text-gray-600">Description: {selectedPet.description}</p>
+                    <p className="text-gray-600">Diseases: {selectedPet.diseases}</p>
+
                 </div>
             ) : (
                 <div>
