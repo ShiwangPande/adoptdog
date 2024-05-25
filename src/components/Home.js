@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-const DogModal = ({ dog, onClose, onAdopt }) => {
+
+const DogModal = React.memo(({ dog, onClose, onAdopt }) => {
     if (!dog) return null;
 
     return (
@@ -31,9 +32,9 @@ const DogModal = ({ dog, onClose, onAdopt }) => {
             </div>
         </div>
     );
-};
+});
 
-const ContactModal = ({ contactInfo, onClose }) => {
+const ContactModal = React.memo(({ contactInfo, onClose }) => {
     if (!contactInfo) return null;
 
     return (
@@ -57,63 +58,70 @@ const ContactModal = ({ contactInfo, onClose }) => {
             </div>
         </div>
     );
-};
+});
 
 const Adopt = () => {
     const [dogs, setDogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [selectedDog, setSelectedDog] = useState(null);
+    const [contactInfo, setContactInfo] = useState(null);
+
     useEffect(() => {
         fetchPets();
     }, []);
 
-    const fetchPets = () => {
-        axios.get('https://apdoptdogserver.onrender.com/api/pets')
-            .then(response => {
-                setDogs(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching pets:', error);
-            });
+    const fetchPets = async () => {
+        try {
+            const response = await axios.get('https://apdoptdogserver.onrender.com/api/pets');
+            setDogs(response.data);
+        } catch (error) {
+            console.error('Error fetching pets:', error);
+        } finally {
+            setLoading(false);
+        }
     };
-    const [selectedDog, setSelectedDog] = useState(null);
-    const [contactInfo, setContactInfo] = useState(null);
 
-    const handleLearnMore = (dog) => {
+    const handleLearnMore = useCallback((dog) => {
         setSelectedDog(dog);
-    };
+    }, []);
 
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
         setSelectedDog(null);
         setContactInfo(null);
-    };
+    }, []);
 
-    const handleAdopt = (dog) => {
+    const handleAdopt = useCallback((dog) => {
         setContactInfo({
             owner: 'John Doe',
             phone: '123-456-7890'
         });
-    };
+    }, []);
 
     return (
         <div className='bg-gradient-to-br from-blue-200 to-green-200 min-h-screen'>
             <div className="container mx-auto p-6">
                 <h1 className="text-4xl font-bold mb-8 text-center text-black/80 ">Available Dogs for Adoption</h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {dogs.map(dog => (
-                        <div key={dog.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                            <img src={dog.pic} alt={dog.name} className="w-full h-64 object-cover rounded-t-lg" />
-                            <div className="mt-4">
-                                <h2 className="text-2xl font-semibold text-gray-800">{dog.name}</h2>
-                                <p className="text-gray-600 mt-2">{dog.description}</p>
-                                <button
-                                    className="mt-4 bg-black/80 text-white px-4 py-2 rounded-md hover:bg-black transition-colors duration-300"
-                                    onClick={() => handleLearnMore(dog)}
-                                >
-                                    Learn More
-                                </button>
+                {loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {dogs.map(dog => (
+                            <div key={dog.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                                <img src={dog.pic} alt={dog.name} className="w-full h-64 object-cover rounded-t-lg" loading="lazy" />
+                                <div className="mt-4">
+                                    <h2 className="text-2xl font-semibold text-gray-800">{dog.name}</h2>
+                                    <p className="text-gray-600 mt-2">{dog.description}</p>
+                                    <button
+                                        className="mt-4 bg-black/80 text-white px-4 py-2 rounded-md hover:bg-black transition-colors duration-300"
+                                        onClick={() => handleLearnMore(dog)}
+                                    >
+                                        Learn More
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
                 {selectedDog && (
                     <DogModal
                         dog={selectedDog}
