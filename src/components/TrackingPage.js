@@ -122,7 +122,7 @@ const TrackingPage = () => {
                     <LoadingSpinner />
                 ) : selectedPet ? (
                     <div className='p-4'>
-                        <button onClick={handleClearSelection} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">Back to List</button>
+                        <button onClick={handleClearSelection} className="bg-black text-white px-4 py-2 rounded mb-4">Back to List</button>
                         <div className="bg-white p-8 rounded-lg shadow-lg">
                             <h1 className="text-3xl font-bold mb-8 text-center">Edit Pet Information</h1>
                             <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
@@ -231,7 +231,7 @@ const TrackingPage = () => {
                                                 </div>
 
 
-                                                <button type="submit" className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                                <button type="submit" className="bg-black border-2 border-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                                     Update Pet
                                                 </button>
                                             </div>
