@@ -24,42 +24,13 @@ const DogModal = React.memo(({ dog, onClose, onAdopt }) => {
                 <p className="text-gray-600 mb-2"><strong>Location:</strong> {dog.location}</p>
                 <p className="text-gray-600 mb-2"><strong>Description:</strong> {dog.description}</p>
                 <p className="text-gray-600 mb-2"><strong>Diseases:</strong> {dog.diseases}</p>
-                <button
-                    className="mt-4 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors duration-300"
-                    onClick={() => onAdopt(dog)}
-                >
-                    Adopt
-                </button>
+             
             </div>
         </div>
     );
 });
 
-const ContactModal = React.memo(({ contactInfo, onClose }) => {
-    if (!contactInfo) return null;
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-white p-6 rounded-md shadow-lg max-w-md w-full">
-                <button
-                    className="absolute top-2 right-2 text-gray-700 hover:text-red-500 focus:outline-none"
-                    onClick={onClose}
-                >
-                    &times;
-                </button>
-                <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
-                <p className="text-gray-600 mb-2"><strong>Owner:</strong> {contactInfo.owner}</p>
-                <p className="text-gray-600 mb-2"><strong>Phone:</strong> {contactInfo.phone}</p>
-                <button
-                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300"
-                    onClick={() => window.open(`tel:${contactInfo.phone}`)}
-                >
-                    Call Owner
-                </button>
-            </div>
-        </div>
-    );
-});
 
 const Adopt = () => {
     const [dogs, setDogs] = useState([]);
@@ -101,7 +72,7 @@ const Adopt = () => {
     return (
         <div className=' bg-gray-100	 min-h-screen'>
             <div className="container mx-auto p-6">
-                <h1 className="text-4xl font-bold mb-8 text-center text-black/80 ">Available Dogs for Adoption</h1>
+                <h1 className="text-4xl font-bold mb-8 text-center text-black/80 "> Animals in Shelter</h1>
                 {loading ? (
                     <LoadingSpinner />
                 ) : (
@@ -130,12 +101,7 @@ const Adopt = () => {
                         onAdopt={handleAdopt}
                     />
                 )}
-                {contactInfo && (
-                    <ContactModal
-                        contactInfo={contactInfo}
-                        onClose={handleCloseModal}
-                    />
-                )}
+
             </div>
         </div>
     );
