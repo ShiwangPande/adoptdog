@@ -97,59 +97,61 @@ const AnnualFiguresTable = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-xl font-bold mb-4">Annual Figures (by species)</h1>
-            <table className="table-auto w-full border-collapse border border-gray-200">
-                <thead>
-                    <tr>
-                        <th className="border border-gray-200 px-4 py-2">Species</th>
-                        {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Total'].map((month, index) => (
-                            <th key={index} className="border border-gray-200 px-4 py-2">{month}</th>
-                        ))}
-                        <th className="border border-gray-200 px-4 py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((row, rowIndex) => (
-                        <tr key={row.id}>
-                            <td className="border border-gray-200 px-4 py-2">
-                                <input
-                                    type="text"
-                                    value={row.species}
-                                    onChange={(e) => handleCellChange(rowIndex, 'species', e.target.value)}
-                                    className="w-full"
-                                />
-                            </td>
-                            {['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'].map((col, colIndex) => (
-                                <td key={colIndex} className="border border-gray-200 px-4 py-2">
+            <h1 className="text-2xl font-semibold mb-8 text-center">Annual Figures (by species)</h1>
+            <div className="overflow-x-auto">
+                <table className="table-auto min-w-max w-full whitespace-nowrap border-collapse border border-gray-200">
+                    <thead>
+                        <tr>
+                            <th className="border border-gray-200 px-4 py-2">Species</th>
+                            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Total'].map((month, index) => (
+                                <th key={index} className="border border-gray-200 px-4 py-2">{month}</th>
+                            ))}
+                            <th className="border border-gray-200 px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((row, rowIndex) => (
+                            <tr key={row.id}>
+                                <td className="border border-gray-200 px-4 py-2">
                                     <input
-                                        type="number"
-                                        value={row[col]}
-                                        onChange={(e) => handleCellChange(rowIndex, col, parseInt(e.target.value, 10))}
-                                        className="w-full"
+                                        type="text"
+                                        value={row.species}
+                                        onChange={(e) => handleCellChange(rowIndex, 'species', e.target.value)}
+                                        className="w-full  font-semibold capitalize px-1"
                                     />
                                 </td>
-                            ))}
-                            <td className="border border-gray-200 px-4 py-2">{row.total}</td>
-                            <td className="border border-gray-200 px-4 py-2">
-                                <button
-                                    onClick={() => removeRow(row.id)}
-                                    className="bg-red-500 text-white px-2 py-1 rounded"
-                                >
-                                    Remove
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                    <tr>
-                        <td className="border border-gray-200 px-4 py-2 font-bold">Total</td>
-                        {totals.map((total, index) => (
-                            <td key={index} className="border border-gray-200 px-4 py-2 font-bold">{total}</td>
+                                {['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'].map((col, colIndex) => (
+                                    <td key={colIndex} className="border border-gray-200 px-4 py-2">
+                                        <input
+                                            type="number"
+                                            value={row[col]}
+                                            onChange={(e) => handleCellChange(rowIndex, col, parseInt(e.target.value, 10))}
+                                            className="w-full px-1"
+                                        />
+                                    </td>
+                                ))}
+                                <td className="border border-gray-200 px-4 py-2">{row.total}</td>
+                                <td className="border border-gray-200 px-4 py-2">
+                                    <button
+                                        onClick={() => removeRow(row.id)}
+                                        className="bg-red-500 text-white px-2 py-1 rounded"
+                                    >
+                                        Remove
+                                    </button>
+                                </td>
+                            </tr>
                         ))}
-                        <td className="border border-gray-200 px-4 py-2"></td>
-                    </tr>
-
-                </tbody>
-            </table>
+                        <tr>
+                            <td className="border border-gray-200 px-4 py-2 font-bold">Total</td>
+                            {totals.slice(0, 12).map((total, index) => (
+                                <td key={index} className="border border-gray-200 px-4 py-2 font-bold">{total}</td>
+                            ))}
+                            <td key="total" className="border border-gray-200 px-4 py-2 font-bold">{totals[12]}</td>
+                            <td className="border border-gray-200 px-4 py-2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <button onClick={addRow} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
                 Add Row
             </button>
